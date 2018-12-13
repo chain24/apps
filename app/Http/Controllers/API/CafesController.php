@@ -16,11 +16,11 @@ class CafesController extends Controller
      |-------------------------------------------------------------------------------
      | URL:            /api/v1/cafes
      | Method:         GET
-     | Description:    Gets all of the cafes in the application
+     | Description:    Gets all of the cafes and brewMethods in the application
     */
     public function getCafes()
     {
-        $cafes = Cafe::all();
+        $cafes = Cafe::with('brewMethods')->get();
         return response()->json($cafes);
     }
     /*
@@ -29,13 +29,13 @@ class CafesController extends Controller
      |-------------------------------------------------------------------------------
      | URL:            /api/v1/cafes/{id}
      | Method:         GET
-     | Description:    Gets an individual cafe
+     | Description:    Gets an individual cafe and brewMethod
      | Parameters:
      |   $id   -> ID of the cafe we are retrieving
     */
     public function getCafe($id)
     {
-        $cafe = Cafe::where('id', '=', $id)->first();
+        $cafe = Cafe::where('id', '=', $id)->with('brewMethods')->first();
         return response()->json($cafe);
     }
     /*
