@@ -25,3 +25,4 @@ Route::resource('blog/list', 'Blog\ListController');
 Route::get('geocode', function () {
     return \App\Utilities\GaodeMaps::geocodeAddress('天城路1号', '杭州', '浙江');
 });
+Route::get('/cafe/{id}', 'API\CafesController@getCafe');
