@@ -23,5 +23,6 @@ export default new Vuex.Store({
     modules: {
         cafes,
         users,
+        brewMethods
     }
 });
