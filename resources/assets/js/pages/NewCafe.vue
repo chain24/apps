@@ -118,17 +118,26 @@
             },
             validateNewCafe: function () {
                 let validNewCafeForm = true;
+                // 确保 name 字段不为空
+                if( this.name.trim() === '' ){
+                    validNewCafeForm = false;
+                    this.validations.name.is_valid = false;
+                    this.validations.name.text = 'please enter a name for the new cafe!';
+                }else{
+                    this.validations.name.is_valid = true;
+                    this.validations.name.text = '';
+                }
+                // 确保网址是有效的 URL
+                if (this.website.trim !== '' && !this.website.match(/^((https?):\/\/)?([w|W]{3}\.)+[a-zA-Z0-9\-\.]{3,}\.[a-zA-Z]{2,}(\.[a-zA-Z]{2,})?$/)) {
+                    validNewCafeForm = false;
+                    this.validations.website.is_valid = false;
+                    this.validations.website.text = 'please enter an valid URL for new cafe!';
+                } else {
+                    this.validations.website.is_valid = true;
+                    this.validations.website.text = '';
+                }
                 for (var index in this.locations) {
                     if (this.locations.hasOwnProperty(index)){
-                        // 确保 name 字段不为空
-                        if( this.locations[index].name.trim() === '' ){
-                            validNewCafeForm = false;
-                            this.validations.locations[index].name.is_valid = false;
-                            this.validations.locations[index].name.text = 'please enter a name for the new cafe!';
-                        }else{
-                            this.validations.locations[index].name.is_valid = true;
-                            this.validations.locations[index].name.text = '';
-                        }
                         //确保地址字段不为空
                         if (this.locations[index].address.trim() === ''){
                             validNewCafeForm = false;
@@ -164,15 +173,6 @@
                         }else{
                             this.validations.locations[index].zip.is_valid = true;
                             this.validations.locations[index].zip.text = '';
-                        }
-                        // 确保网址是有效的 URL
-                        if (this.website.trim !== '' && !this.website.match(/^((https?):\/\/)?([w|W]{3}\.)+[a-zA-Z0-9\-\.]{3,}\.[a-zA-Z]{2,}(\.[a-zA-Z]{2,})?$/)) {
-                            validNewCafeForm = false;
-                            this.validations.website.is_valid = false;
-                            this.validations.website.text = 'please enter an valid URL for new cafe!';
-                        } else {
-                            this.validations.website.is_valid = true;
-                            this.validations.website.text = '';
                         }
                     }
                 }

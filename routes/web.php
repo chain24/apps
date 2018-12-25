@@ -20,10 +20,10 @@ Route::get( '/auth/{social}', 'Web\AuthenticationController@getSocialRedirect' )
 
 Route::get( '/auth/{social}/callback', 'Web\AuthenticationController@getSocialCallback' )
     ->middleware('guest');
-Route::resource('test', 'TestController');
-Route::resource('blog/list', 'Blog\ListController');
+//Route::resource('test', 'TestController');
+//Route::resource('blog/list', 'Blog\ListController');
 Route::get('geocode', function () {
     return \App\Utilities\GaodeMaps::geocodeAddress('天城路1号', '杭州', '浙江');
 });
 Route::get('/cafe/{id}', 'API\CafesController@getCafe');
-Route::get('/posts/{id}', 'Post\PostController@showPost');
+//Route::get('/posts/{id}', 'Post\PostController@showPost');

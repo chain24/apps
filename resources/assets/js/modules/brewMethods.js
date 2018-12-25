@@ -38,8 +38,8 @@ export const brewMethods = {
             state.brewMethodsLoadStatus = status;
         },
 
-        setBrewMethods( state, brewMethod ){
-            state.brewMethod = brewMethod;
+        setBrewMethods( state, brewMethods ){
+            state.brewMethods = brewMethods;
         }
     },
     getters: {
