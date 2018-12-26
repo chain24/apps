@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\Cafe;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use \Laravel\Passport\HasApiTokens;
@@ -25,6 +26,10 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token','provider', 'provider_id'
     ];
+    public function likes()
+    {
+        return $this->belongsToMany(Cafe::class, 'users_cafes_likes', 'user_id', 'cafe_id');
+    }
 }

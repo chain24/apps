@@ -1,26 +1,3 @@
-<style lang="scss">
-    @import '~@/abstracts/_variables.scss';
-    span.toggle-like {
-        span.like-toggle {
-            display: inline-block;
-            cursor: pointer;
-            color: #8E8E8E;
-            font-size: 18px;
-            margin-bottom: 5px;
-            span.image-container {
-                width: 35px;
-                text-align: center;
-                display: inline-block;
-            }
-        }
-        span.like-count {
-            font-family: "Lato", sans-serif;
-            font-size: 12px;
-            margin-left: 10px;
-            color: #8E8E8E;
-        }
-    }
-</style>
 <template>
      <span class="toggle-like">
         <span class="like" v-on:click="likeCafe( cafe.id )"
@@ -36,6 +13,13 @@
                  :height="30"
                  :display="'inline-block'">
         </loader>
+         <div class="tags-container">
+            <div class="grid-x grid-padding-x">
+                <div class="large-12 medium-12 small-12 cell">
+                    <span class="tag" v-for="tag in cafe.tags">#{{ tag.name }}</span>
+                </div>
+            </div>
+        </div>
     </span>
 </template>
 
@@ -69,14 +53,49 @@
         methods: {
             likeCafe(cafeID) {
                 this.$store.dispatch('likeCafe', {
-                    id: this.cafe.id
+                    id: cafeID
                 });
             },
             unlikeCafe(cafeID) {
                 this.$store.dispatch('unlikeCafe', {
-                    id: this.cafe.id
+                    id:cafeID
                 });
             }
         }
     }
 </script>
+<style lang="scss">
+    @import '~@/abstracts/_variables.scss';
+    span.toggle-like {
+        span.like-toggle {
+            display: inline-block;
+            cursor: pointer;
+            color: #8E8E8E;
+            font-size: 18px;
+            margin-bottom: 5px;
+            span.image-container {
+                width: 35px;
+                text-align: center;
+                display: inline-block;
+            }
+        }
+        span.like,span.un-like{
+            font-family: "Lato", sans-serif;
+            font-size: 16px;
+            margin: 256px;
+            color: $green-color;
+        }
+        div.tags-container {
+            max-width: 700px;
+            margin: auto;
+            text-align: center;
+            span.tag {
+                color: $dark-color;
+                font-family: 'Josefin Sans', sans-serif;
+                margin-right: 20px;
+                display: inline-block;
+                line-height: 20px;
+            }
+        }
+    }
+</style>

@@ -14,7 +14,7 @@
 
                         <div class="grid-x">
                             <div class="large-12 medium-12 small-12 cell">
-                                <toggle-like></toggle-like>
+                                <toggle-like ></toggle-like>
                             </div>
                         </div>
 
@@ -81,7 +81,7 @@
     }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
     @import '~@/abstracts/_variables.scss';
 
     div.cafe-page {
@@ -120,7 +120,8 @@
         div.brew-methods-container {
             max-width: 700px;
             margin: auto;
-
+            color: $red-color;
+            font-family: 'Josefin Sans', sans-serif;
             div.cell {
                 text-align: center;
             }

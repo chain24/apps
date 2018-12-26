@@ -6,8 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCafeRequest;
 use App\Models\Cafe;
 use App\Utilities\GaodeMaps;
+use App\Utilities\Tagger;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 
 class CafesController extends Controller
@@ -37,7 +40,7 @@ class CafesController extends Controller
     */
     public function getCafe($id)
     {
-        $cafe = Cafe::where('id', '=', $id)->with('brewMethods')->withCount('userLike')->withCount('likes')->first();
+        $cafe = Cafe::where('id', '=', $id)->with('brewMethods')->withCount('userLike')->withCount('likes')->with('tags')->first();
         return response()->json($cafe);
     }
     /*
@@ -74,8 +77,11 @@ class CafesController extends Controller
         $parentCafe->save();
         //冲泡方法
         $brewMethods = $locations[0]['methodsAvailable'];
+        //标签信息
+        $tags = $locations[0]['tags'];
         //保存咖啡店的所有的冲泡方法
         $parentCafe->brewMethods()->sync($brewMethods);
+        Tagger::tagCafe($parentCafe,$tags,Auth::user()->id);
         //保存已添加的咖啡店信息
         array_push($addedCafes,$parentCafe->toArray());
         // 第一个索引的位置信息已经使用，从第 2 个位置开始
@@ -102,7 +108,7 @@ class CafesController extends Controller
                 $cafe->save();
 
                 $cafe->brewMethods()->sync($locations[$i]['methodsAvailable']);
-
+                Tagger::tagCafe($cafe,$locations[$i]['tags'],Auth::user()->id);
                 array_push($addedCafes, $cafe->toArray());
             }
         }
@@ -121,6 +127,23 @@ class CafesController extends Controller
     {
         $cafe = Cafe::where('id','=',$cafeID)->with('likes')->first();
         $cafe->likes()->detach(Auth::user()->id);
+        return response(null,204);
+    }
+    public function postAddTags(Request $request,$cafeID)
+    {
+        $tags = $request->input('tags');
+        $cafe = Cafe::find($cafeID);
+        Tagger::tagCafe($cafe,$tags,Auth::user()->id);
+        $cafe = Cafe::where('id','=',$cafeID)->with('brewMethods')->with('userLike')->with('tags')->first();
+        return response()->json($cafe,201);
+    }
+    public function deleteCafeTag($cafeID,$tagID)
+    {
+        DB::table('cafes_users_tags')
+            ->where('cafe_id','=', $cafeID)
+            ->where('tag_id','=',$tagID)
+            ->where('user_id','=',Auth::user()->id)
+        ->delete();
         return response(null,204);
     }
 }
