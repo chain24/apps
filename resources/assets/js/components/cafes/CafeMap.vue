@@ -7,7 +7,6 @@
 <script>
     import {ROAST_CONFIG} from '../../config.js';
     import {EventBus} from '../../event-bus.js';
-    import cafe from "../../api/cafe";
     import CafeMapFilter from './CafeMapFilter';
     import { CafeIsRoasterFilter } from '../../mixins/filters/CafeIsRoasterFilter.js';
     import { CafeBrewMethodsFilter } from '../../mixins/filters/CafeBrewMethodsFilter.js';
@@ -77,10 +76,12 @@
 
                     // 通过高德地图 API 为每个咖啡店创建点标记并设置经纬度
                     var marker = new AMap.Marker({
-                        position: AMap.LngLat(parseFloat(this.cafes[i].latitude), parseFloat(this.cafes[i].longitude)),
-                        title: this.cafes[i].name,
+                        position: new AMap.LngLat(parseFloat(this.cafes[i].latitude), parseFloat(this.cafes[i].longitude)),
+                        title: this.cafes[i].location_name,
                         icon: icon,
-                        map: this.map
+                        extData: {
+                            'cafe': this.cafes[i]
+                        }
                     });
                     // 为每个咖啡店创建信息窗体
                     var infoWindow = new AMap.InfoWindow({

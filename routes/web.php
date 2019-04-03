@@ -23,7 +23,7 @@ Route::get( '/auth/{social}/callback', 'Web\AuthenticationController@getSocialCa
 //Route::resource('test', 'TestController');
 //Route::resource('blog/list', 'Blog\ListController');
 Route::get('geocode', function () {
-    return \App\Utilities\GaodeMaps::geocodeAddress('天城路1号', '杭州', '浙江');
+    return \App\Utilities\GaodeMaps::geocodeAddress('光谷大道126号', '武汉', '湖北');
 });
 Route::get('/cafe/{id}', 'API\CafesController@getCafe');
 //Route::get('/posts/{id}', 'Post\PostController@showPost');
