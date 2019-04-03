@@ -1,6 +1,6 @@
 <template>
     <div id="cafe-map">
-
+        <cafe-map-filter></cafe-map-filter>
     </div>
 </template>
 
@@ -8,6 +8,10 @@
     import {ROAST_CONFIG} from '../../config.js';
     import {EventBus} from '../../event-bus.js';
     import cafe from "../../api/cafe";
+    import CafeMapFilter from './CafeMapFilter';
+    import { CafeIsRoasterFilter } from '../../mixins/filters/CafeIsRoasterFilter.js';
+    import { CafeBrewMethodsFilter } from '../../mixins/filters/CafeBrewMethodsFilter.js';
+    import { CafeTextFilter } from '../../mixins/filters/CafeTextFilter.js';
     export default {
         props: {
             'latitude': {  // 经度
@@ -35,6 +39,9 @@
                 infoWindows: []
             }
         },
+        components: {
+            CafeMapFilter
+        },
         mounted() {
             this.map = new AMap.Map('cafe-map', {
                 center: [this.latitude, this.longitude],
@@ -42,6 +49,11 @@
             });
             this.clearMarkers();
             this.buildMarkers();
+
+            // 监听 filters-updated 事件过滤点标记
+            EventBus.$on('filters-updated', function (filters) {
+                this.processFilters(filters);
+            }.bind(this));
         },
         computed: {
             cafes(){
@@ -93,7 +105,44 @@
                 for (var i = 0; i < this.markers.length; i++) {
                     this.markers[i].setMap(null);
                 }
-            }
+            },
+            processFilters(filters) {
+                for (var i = 0; i < this.markers.length; i++) {
+                    if (filters.text === ''
+                        && filters.roaster === false
+                        && filters.brew_methods.length === 0) {
+                        this.markers[i].setMap(this.map);
+                    } else {
+                        var textPassed = false;
+                        var brewMethodsPassed = false;
+                        var roasterPassed = false;
+
+                        if (filters.roaster && this.processCafeIsRoasterFilter(this.markers[i].getExtData().cafe)) {
+                            roasterPassed = true;
+                        } else if (!filters.roaster) {
+                            roasterPassed = true;
+                        }
+
+                        if (filters.text !== '' && this.processCafeTextFilter(this.markers[i].getExtData().cafe, filters.text)) {
+                            textPassed = true;
+                        } else if (filters.text === '') {
+                            textPassed = true;
+                        }
+
+                        if (filters.brew_methods.length !== 0 && this.processCafeBrewMethodsFilter(this.markers[i].getExtData().cafe, filters.brew_methods)) {
+                            brewMethodsPassed = true;
+                        } else if (filters.brew_methods.length === 0) {
+                            brewMethodsPassed = true;
+                        }
+
+                        if (roasterPassed && textPassed && brewMethodsPassed) {
+                            this.markers[i].setMap(this.map);
+                        } else {
+                            this.markers[i].setMap(null);
+                        }
+                    }
+                }
+            },
         },
         watch: {
             // 一旦 cafes 有更新立即重构地图点标记
@@ -101,7 +150,12 @@
                 this.clearMarkers();
                 this.buildMarkers();
             }
-        }
+        },
+        mixins: [
+            CafeIsRoasterFilter,
+            CafeBrewMethodsFilter,
+            CafeTextFilter
+        ],
     }
 </script>
 
@@ -109,5 +163,20 @@
     div#cafe-map {
         width: 100%;
         height: 400px;
+    }
+    div#cafe-map-container {
+        position: absolute;
+        top: 50px;
+        left: 0;
+        right: 0;
+        bottom: 50px;
+
+        div#cafe-map {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
     }
 </style>

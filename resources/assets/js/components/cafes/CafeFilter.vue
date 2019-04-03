@@ -11,7 +11,8 @@
                     <tags-input v-bind:unique="'cafe-search'"></tags-input>
                 </div>
                 <div class="is-roaster-container">
-                    <input type="checkbox" v-model="isRoaster"/> <label>是否是烘焙店?</label>
+                    <label>是否是烘焙店?</label>
+                    <input type="checkbox" v-model="isRoaster"/>
                 </div>
                 <div class="brew-methods-container">
                     <div class="filter-brew-method" v-on:click="toggleBrewMethodFilter( method.method )"
@@ -56,7 +57,7 @@
         methods: {
             toggleBrewMethodFilter(method) {
                 if (this.brewMethods.indexOf(method) > -1) {
-                    this.brewMethods.splice(this.brewMethods.indexOf(method), 1);
+                    this.brewMethods.splice(this.brewMethods.indexOf(method), 1);//替换
                 } else {
                     this.brewMethods.push(method);
                 }

@@ -24,7 +24,7 @@
 </template>
 
 <script>
-    import Loader from '../../components/global/Loader.vue';
+    import Loader from '../global/Loader.vue';
     export default {
         components: {
             Loader

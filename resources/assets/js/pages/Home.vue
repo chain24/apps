@@ -22,7 +22,7 @@
 </template>
 
 <script>
-    import Loader from '../components/global/loader.vue';
+    import Loader from '../components/global/Loader.vue';
     import CafeCard from '../components/cafes/CafeCard.vue';
     import CafeFilter from '../components/cafes/CafeFilter.vue';
     export default {

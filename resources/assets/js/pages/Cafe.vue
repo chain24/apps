@@ -28,7 +28,7 @@
 
                         <div class="brew-methods-container">
                             <div class="grid-x grid-padding-x">
-                                <div class="large-3 medium-4 small-12 cell" v-for="brewMethod in cafe.brew_methods">
+                                <div class="large-4 medium-4 small-4 cell" v-for="brewMethod in cafe.brew_methods">
                                     {{ brewMethod.method }}
                                 </div>
                             </div>
