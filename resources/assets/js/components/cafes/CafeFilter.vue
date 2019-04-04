@@ -1,8 +1,40 @@
+<style lang="scss">
+    @import "~@/abstracts/_variables.scss";
+
+    div.filter-brew-method {
+        display: inline-block;
+        height: 35px;
+        text-align: center;
+        border: 1px solid #ededed;
+        border-radius: 5px;
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        margin-right: 10px;
+        margin-top: 10px;
+        cursor: pointer;
+        color: $dark-color;
+        font-family: 'Josefin Sans', sans-serif;
+        &.active {
+            border-bottom: 4px solid $primary-color;
+        }
+    }
+    span.show-filters{
+        display: block;
+        margin: auto;
+        color: $dark-color;
+        font-family: 'Josefin Sans', sans-serif;
+        cursor: pointer;
+        font-size: 14px;
+    }
+
+
+</style>
 <template>
     <div id="cafe-filter">
         <div class="grid-container" v-show="show">
             <div class="grid-x grid-padding-x">
-                <span class="show-filters" v-on:click="show = !show">{{ show ? '隐藏过滤器 ↑' : '显示过滤器 ↓' }}</span>
                 <div class="large-6 medium-6 small-12 cell">
                     <label>搜索</label>
                     <input type="text" v-model="textSearch" placeholder="搜索"/>
@@ -11,8 +43,7 @@
                     <tags-input v-bind:unique="'cafe-search'"></tags-input>
                 </div>
                 <div class="is-roaster-container">
-                    <label>是否是烘焙店?</label>
-                    <input type="checkbox" v-model="isRoaster"/>
+                    <input type="checkbox" v-model="isRoaster"/> <label>是否是烘焙店?</label>
                 </div>
                 <div class="brew-methods-container">
                     <div class="filter-brew-method" v-on:click="toggleBrewMethodFilter( method.method )"
@@ -21,6 +52,11 @@
                         {{ method.method }}
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="grid-container">
+            <div class="grid-x grid-padding-x">
+                <span class="show-filters" v-on:click="show = !show">{{ show ? '隐藏过滤器 ↑' : '显示过滤器 ↓' }}</span>
             </div>
         </div>
     </div>
@@ -87,36 +123,3 @@
         }
     }
 </script>
-
-<style scoped>
-    @import '~@/abstracts/_variables.scss';
-
-    div.filter-brew-method{
-        display: inline-block;
-        height: 35px;
-        text-align: center;
-        border: 1px solid #ededed;
-        border-radius: 5px;
-        padding-left: 10px;
-        padding-right: 10px;
-        padding-top: 5px;
-        padding-bottom: 5px;
-        margin-right: 10px;
-        margin-top: 10px;
-        cursor: pointer;
-        color: $dark-color;
-        font-family: 'Josefin Sans', sans-serif;
-
-    &.active{
-         border-bottom: 4px solid $primary-color;
-     }
-    },
-    span.show-filters{
-        display: block;
-        margin: auto;
-        color: $dark-color;
-        font-family: 'Josefin Sans', sans-serif;
-        cursor: pointer;
-        font-size: 14px;
-    }
-</style>

@@ -95,7 +95,7 @@
     }
 </script>
 
-<style scoped>
+<style lang="scss">
     @import '~@/abstracts/_variables.scss';
 
     div.cafe-card {
@@ -107,6 +107,7 @@
         -webkit-transform: scaleX(1) scaleY(1);
         transform: scaleX(1) scaleY(1);
         transition: .2s;
+
     span.title {
         display: block;
         text-align: center;
@@ -115,40 +116,50 @@
         font-weight: bold;
         font-family: 'Lato', sans-serif;
     }
+
     span.address {
         display: block;
         text-align: center;
         margin-top: 5px;
-        color: $grey;
+        color: $grey-color;
         font-family: 'Lato', sans-serif;
+
     span.street {
         font-size: 14px;
         display: block;
     }
+
     span.city {
         font-size: 14px;
     }
+
     span.state {
         font-size: 14px;
     }
+
     span.zip {
         font-size: 14px;
         display: block;
     }
+
     }
     span.liked-meta {
-        color: $grey;
+        color: $grey-color;
         font-size: 10px;
         margin-left: 5px;
         margin-right: 3px;
+
     img {
         width: 10px;
     }
+
     }
-    &:hover {
-         -webkit-transform: scaleX(1.041) scaleY(1.041);
-         transform: scaleX(1.041) scaleY(1.041);
-         transition: .2s;
-     }
+    &
+    :hover {
+        -webkit-transform: scaleX(1.041) scaleY(1.041);
+        transform: scaleX(1.041) scaleY(1.041);
+        transition: .2s;
+    }
+
     }
 </style>

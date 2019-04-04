@@ -10,11 +10,8 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', 'Web\AppController@getApp')
-    ->middleware('auth');
-Route::get('/login', 'Web\AppController@getLogin' )
-    ->name('login')
-    ->middleware('guest');
+Route::get('/', 'Web\AppController@getApp');
+
 Route::get( '/auth/{social}', 'Web\AuthenticationController@getSocialRedirect' )
     ->middleware('guest');
 

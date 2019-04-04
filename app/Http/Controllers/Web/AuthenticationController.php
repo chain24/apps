@@ -3,10 +3,8 @@
 namespace App\Http\Controllers\Web;
 
 use App\User;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use Laravel\Socialite\AbstractUser;
 use Laravel\Socialite\Facades\Socialite;
 
 class AuthenticationController extends Controller
@@ -16,7 +14,7 @@ class AuthenticationController extends Controller
         try{
             return Socialite::with($account)->redirect();
         }catch (\InvalidArgumentException $exception){
-            return redirect('/login');
+            return redirect('/');
         }
     }
     public function getSocialCallback($account)

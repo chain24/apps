@@ -16,10 +16,8 @@ use Illuminate\Http\Request;
 //Route::middleware('auth:api')->get('/user', function (Request $request) {
 //    return $request->user();
 //});
-Route::group(['prefix' => 'v1', 'middleware' => 'auth:api'], function(){
-    Route::get('/user', function( Request $request ){
-        return $request->user();
-    });
+// 公有路由，无需登录即可访问
+Route::group(['prefix' => 'v1'], function(){
     /*
      |-------------------------------------------------------------------------------
      | Get All Cafes
@@ -44,16 +42,6 @@ Route::group(['prefix' => 'v1', 'middleware' => 'auth:api'], function(){
 
     /*
      |-------------------------------------------------------------------------------
-     | Adds a New Cafe
-     |-------------------------------------------------------------------------------
-     | URL:            /api/v1/cafes
-     | Controller:     API\CafesController@postNewCafe
-     | Method:         POST
-     | Description:    Adds a new cafe to the application
-    */
-    Route::post('/cafes', 'API\CafesController@postNewCafe');
-    /*
-     |-------------------------------------------------------------------------------
      | Get All Methods
      |-------------------------------------------------------------------------------
      | URL:            /api/v1/brew-methods
@@ -62,6 +50,35 @@ Route::group(['prefix' => 'v1', 'middleware' => 'auth:api'], function(){
      | Description:    Gets all of the brew-methods in the application
     */
     Route::get('/brew-methods', 'API\BrewMethodsController@getBrewMethods');
+
+    /*
+    |-------------------------------------------------------------------------------
+    | 搜索标签（自动提示/补全）
+    |-------------------------------------------------------------------------------
+    | 请求URL:            /api/v1/tags
+    | 控制器:             API\TagsController@getTags
+    | 请求方式:           GET
+    | 功能描述:   根据输入词提供标签补全功能
+    */
+    Route::get('/tags', 'API\TagsController@getTags');
+
+    Route::get('/user', 'API\UserController@getUser');
+
+});
+
+Route::group(['prefix' => 'v1', 'middleware' => 'auth:api'], function(){
+
+    /*
+     |-------------------------------------------------------------------------------
+     | Adds a New Cafe
+     |-------------------------------------------------------------------------------
+     | URL:            /api/v1/cafes
+     | Controller:     API\CafesController@postNewCafe
+     | Method:         POST
+     | Description:    Adds a new cafe to the application
+    */
+    Route::post('/cafes', 'API\CafesController@postNewCafe');
+
     /*
      |-------------------------------------------------------------------------------
      | Get cafe of like
@@ -103,14 +120,5 @@ Route::group(['prefix' => 'v1', 'middleware' => 'auth:api'], function(){
     | 功能描述:    用户从某个咖啡店上删除标签
     */
     Route::delete('/cafes/{id}/tags/{tagID}', 'API\CafesController@deleteCafeTag');
-    /*
-    |-------------------------------------------------------------------------------
-    | 搜索标签（自动提示/补全）
-    |-------------------------------------------------------------------------------
-    | 请求URL:            /api/v1/tags
-    | 控制器:             API\TagsController@getTags
-    | 请求方式:           GET
-    | 功能描述:   根据输入词提供标签补全功能
-    */
-    Route::get('/tags', 'API\TagsController@getTags');
+
 });
