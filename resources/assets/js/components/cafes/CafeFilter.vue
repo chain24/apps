@@ -7,10 +7,7 @@
         text-align: center;
         border: 1px solid #ededed;
         border-radius: 5px;
-        padding-left: 10px;
-        padding-right: 10px;
-        padding-top: 5px;
-        padding-bottom: 5px;
+        padding: 5px 10px;
         margin-right: 10px;
         margin-top: 10px;
         cursor: pointer;
@@ -80,7 +77,7 @@
         },
         mounted() {
             EventBus.$on('tags-edited', function( tagsEdited ){
-                if( tagsEdited.unique == 'cafe-search' ){
+                if( tagsEdited.unique === 'cafe-search' ){
                     this.tags = tagsEdited.tags;
                 }
             }.bind(this));
