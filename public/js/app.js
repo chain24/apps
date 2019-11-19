@@ -59202,6 +59202,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             city: '',
             state: '',
             zip: '',
+            isDisabled: false,
             validations: {
                 name: {
                     is_valid: true,
@@ -59237,6 +59238,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     state: this.state,
                     zip: this.zip
                 });
+                this.isDisabled = true;
+                this.$router.push({ name: 'cafes' });
             }
         },
         validateNewCafe: function validateNewCafe() {
@@ -59525,6 +59528,7 @@ var render = function() {
                 "a",
                 {
                   staticClass: "button",
+                  attrs: { disabled: _vm.isDisabled },
                   on: {
                     click: function($event) {
                       _vm.submitNewCafe()
