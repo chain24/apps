@@ -58017,9 +58017,8 @@ var users = {
          Returns the user load status.
          */
         getUserLoadStatus: function getUserLoadStatus(state) {
-            return function () {
-                return state.userLoadStatus;
-            };
+
+            return state.userLoadStatus;
         },
 
         /*
@@ -58398,7 +58397,7 @@ var render = function() {
           "li",
           [
             _c("router-link", { attrs: { to: { name: "newcafe" } } }, [
-              _vm._v("\n                Add New Cafe\n            ")
+              _c("span", { staticClass: "logo" }, [_vm._v("Add New Cafes")])
             ])
           ],
           1
@@ -58544,7 +58543,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\nul li[data-v-440dff1c]{\n    list-style-type: none;\n}\n", ""]);
 
 // exports
 
@@ -58555,6 +58554,9 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
 //
 //
 //
@@ -58638,6 +58640,13 @@ var render = function() {
         ]
       },
       [_vm._v("Cafes loaded unsuccessfully!")]
+    ),
+    _vm._v(" "),
+    _c(
+      "ul",
+      _vm._l(_vm.cafes, function(cafe) {
+        return _c("li", [_vm._v(_vm._s(cafe.name))])
+      })
     )
   ])
 }
