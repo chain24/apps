@@ -57,6 +57,9 @@ class CafesController extends Controller
         $coordinates = GaodeMaps::geocodeAddress($request->get('address'),$request->get('city'),$request->get('state'));
         $cafe->latitude      = $coordinates['lat'];
         $cafe->longitude      = $coordinates['lng'];
+        if ( $cafe->isDuplicateAddCafes( $request->all()) ){
+           throw new \ErrorException('不可重复添加');
+        }
         $cafe->save();
         return response()->json($cafe, 201);
     }

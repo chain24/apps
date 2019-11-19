@@ -87,9 +87,14 @@
                         city: this.city,
                         state: this.state,
                         zip: this.zip
+                    }).then(function (response) {
+                        this.isDisabled = true;
+                        this.$router.push({name: 'home'});
+                    }).catch(function () {
+                        this.isDisabled = false;
+                        this.validations.name.text = '咖啡店的名字不可相同';
                     });
-                    this.isDisabled = true
-                    this.$router.push({name: 'home'});
+
                 }
             },
             validateNewCafe: function () {
