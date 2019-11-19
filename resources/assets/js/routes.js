@@ -22,7 +22,6 @@ export default new VueRouter({
     routes: [
         {
             path: '/',
-            redirect: {name: 'home'},
             name: 'layout',
             component: Vue.component( 'Home', require( './pages/Layout.vue' ) ),
             children: [

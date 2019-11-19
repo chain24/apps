@@ -39,7 +39,7 @@ return [
     |
     */
 
-    'debug' => env('APP_DEBUG', true),
+    'debug' => env('APP_DEBUG', false),
 
     /*
     |--------------------------------------------------------------------------
@@ -65,7 +65,7 @@ return [
     |
     */
 
-    'timezone' => 'PRC',
+    'timezone' => 'UTC',
 
     /*
     |--------------------------------------------------------------------------
@@ -176,9 +176,9 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        //App\Providers\TestServiceProvider::class,
-        //App\Providers\PostMapperServiceProvider::class,
-        //App\Providers\PostServiceProvider::class,
+        App\Providers\TestServiceProvider::class,
+        App\Providers\PostMapperServiceProvider::class,
+        App\Providers\PostServiceProvider::class,
 
     ],
 

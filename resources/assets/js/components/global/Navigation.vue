@@ -7,22 +7,27 @@
         <ul class="links">
             <li>
                 <router-link :to="{ name: 'cafes' }">
-                    Cafes
+                    <span class="logo">Cafes</span>
+                </router-link>
+            </li>
+        </ul>
+
+        <ul class="links">
+            <li>
+                <router-link :to="{ name: 'newcafe' }">
+                    <span class="logo">Add New Cafes</span>
                 </router-link>
             </li>
         </ul>
 
         <div class="right">
-            <img class="avatar" v-if="user != '' && userLoadStatus === 2" :src="user.avatar" v-show="userLoadStatus === 2"/>
-            <span class="logout" v-if="user != '' && userLoadStatus === 2" v-on:click="logout()">退出</span>
-            <span class="login" v-if="user == ''" v-on:click="login()">登录</span>
+            <img class="avatar" :src="user.avatar" v-show="userLoadStatus == 2"/>
         </div>
 
     </nav>
 </template>
 
 <script>
-    import {EventBus} from '../../event-bus.js';
     export default {
         // 定义组件的计算属性
         computed: {
@@ -34,15 +39,6 @@
             // 从 Vuex 中获取用户信息
             user(){
                 return this.$store.getters.getUser;
-            }
-        },
-        methods: {
-            login() {
-                EventBus.$emit('prompt-login');
-            },
-            logout() {
-                this.$store.dispatch('logoutUser');
-                window.location = '/logout';
             }
         }
     }

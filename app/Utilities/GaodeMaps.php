@@ -18,6 +18,7 @@ class GaodeMaps
      * @param $address
      * @param $city
      * @param $state
+     * @param $zip
      * @return mixed
      */
     public static function geocodeAddress($address, $city, $state)

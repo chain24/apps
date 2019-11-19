@@ -18,28 +18,15 @@ export default {
     /**
      * POST /api/v1/cafes
      */
-    postAddNewCafe: function( name, locations, website, description, roaster ){
+    postAddNewCafe: function( name, address, city, state, zip ){
         return axios.post( ROAST_CONFIG.API_URL + '/cafes',
             {
                 name: name,
-                locations: locations,
-                website: website,
-                description: description,
-                roaster: roaster
+                address: address,
+                city: city,
+                state: state,
+                zip: zip
             }
         );
-    },
-    /**
-     * POST  /api/v1/cafes/{cafeID}/like
-     */
-    postLikeCafe: function (cafeID) {
-        return axios.post(ROAST_CONFIG.API_URL + '/cafes/' + cafeID + '/like');
-    },
-
-    /**
-     * DELETE /api/v1/cafes/{cafeID}/like
-     */
-    deleteLikeCafe: function (cafeID) {
-        return axios.delete(ROAST_CONFIG.API_URL + '/cafes/' + cafeID + '/like');
     }
 }
