@@ -68,7 +68,9 @@
                         position: AMap.LngLat(parseFloat(this.cafes[i].latitude), parseFloat(this.cafes[i].longitude)),
                         title: this.cafes[i].name,
                         icon: icon,
-                        map: this.map
+                        extData: {
+                            'cafe': this.cafes[i]
+                        }
                     });
                     // 为每个咖啡店创建信息窗体
                     var infoWindow = new AMap.InfoWindow({
