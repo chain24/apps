@@ -58951,7 +58951,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     position: AMap.LngLat(parseFloat(this.cafes[i].latitude), parseFloat(this.cafes[i].longitude)),
                     title: this.cafes[i].name,
                     icon: icon,
-                    map: this.map
+                    extData: {
+                        'cafe': this.cafes[i]
+                    }
                 });
                 // 为每个咖啡店创建信息窗体
                 var infoWindow = new AMap.InfoWindow({
@@ -59237,9 +59239,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     city: this.city,
                     state: this.state,
                     zip: this.zip
+                }).then(function (response) {
+                    this.isDisabled = true;
+                    this.$router.push({ name: 'home' });
+                }).catch(function () {
+                    this.isDisabled = false;
+                    this.validations.name.text = '咖啡店的名字不可相同';
                 });
-                this.isDisabled = true;
-                this.$router.push({ name: 'cafes' });
             }
         },
         validateNewCafe: function validateNewCafe() {
