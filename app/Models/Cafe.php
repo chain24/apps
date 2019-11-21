@@ -13,4 +13,9 @@ class Cafe extends Model
         }
         return false;
     }
+
+    public function brewMethods()
+    {
+        return $this->belongsToMany(BrewMethod::class, 'cafes_brew_methods', 'id', 'brew_method_id');
+    }
 }
