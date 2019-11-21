@@ -179,6 +179,7 @@ return [
         App\Providers\TestServiceProvider::class,
         App\Providers\PostMapperServiceProvider::class,
         App\Providers\PostServiceProvider::class,
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class
 
     ],
 
