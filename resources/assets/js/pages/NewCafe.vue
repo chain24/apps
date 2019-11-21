@@ -72,7 +72,7 @@
                         <a class="button" v-on:click="addLocation()">新增位置</a>
                     </div>
                     <div class="large-12 medium-12 small-12 cell">
-                        <a class="button" v-on:click="submitNewCafe()" :disabled="isDisabled">提交表单</a>
+                        <a class="button" v-on:click="submitNewCafe()">提交表单</a>
                     </div>
                 </div>
             </div>
@@ -115,14 +115,7 @@
                         website: this.website,
                         description: this.description,
                         roaster: this.roaster
-                    }).then(function (response) {
-                        this.isDisabled = true;
-                        this.$router.push({name: 'home'});
-                    }).catch(function () {
-                        this.isDisabled = false;
-                        this.validations.name.text = '咖啡店的名字不可相同';
-                    });
-
+                    })
                 }
             },
             validateNewCafe: function () {
@@ -200,6 +193,30 @@
                     }
                 });
             },
+            clearForm() {
+                this.name = '';
+                this.locations = [];
+                this.website = '';
+                this.description = '';
+                this.roaster = false;
+                this.validations = {
+                    name: {
+                        is_valid: true,
+                        text: ''
+                    },
+                    locations: [],
+                    oneLocation: {
+                        is_valid: true,
+                        text: ''
+                    },
+                    website: {
+                        is_valid: true,
+                        text: ''
+                    }
+                };
+
+                this.addLocation();
+            }
         },
         created(){
             this.addLocation();
@@ -207,6 +224,23 @@
         computed: {
             brewMethods() {
                 return this.$store.getters.getBrewMethods;
+            },
+            addCafeStatus() {
+                return this.$store.getters.getCafeAddStatus;
+            }
+        },
+        watch: {
+            'addCafeStatus': function () {
+                if (this.addCafeStatus === 2) {
+                    // 添加成功
+                    this.clearForm();
+                    $("#cafe-added-successfully").show().delay(5000).fadeOut();
+                }
+
+                if (this.addCafeStatus === 3) {
+                    // 添加失败
+                    $("#cafe-added-unsuccessfully").show().delay(5000).fadeOut();
+                }
             }
         },
     }

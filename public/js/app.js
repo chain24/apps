@@ -475,7 +475,7 @@ if (typeof DEBUG !== 'undefined' && DEBUG) {
   ) }
 }
 
-var listToStyles = __webpack_require__(53)
+var listToStyles = __webpack_require__(55)
 
 /*
 type StyleObject = {
@@ -11787,6 +11787,35 @@ module.exports = Vue;
 
 /***/ }),
 /* 6 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ROAST_CONFIG; });
+/**
+ * Defines the API route we are using.
+ */
+var api_url = '';
+var app_url = '';
+var gaode_maps_js_api_key = '5c3828e42c22e16691fd955182fcab4e';
+switch ("development") {
+    case 'development':
+        api_url = 'https://toast.cc/api/v1';
+        app_url = 'https://toast.cc';
+        break;
+    case 'production':
+        api_url = 'https://toast.cc/api/v1';
+        app_url = 'https://toast.cc';
+        break;
+}
+
+var ROAST_CONFIG = {
+    API_URL: api_url,
+    APP_URL: app_url,
+    GAODE_MAPS_JS_API_KEY: gaode_maps_js_api_key
+};
+
+/***/ }),
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -11883,10 +11912,10 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 
 module.exports = defaults;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -12074,35 +12103,6 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-
-/***/ }),
-/* 8 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ROAST_CONFIG; });
-/**
- * Defines the API route we are using.
- */
-var api_url = '';
-var app_url = '';
-var gaode_maps_js_api_key = '5c3828e42c22e16691fd955182fcab4e';
-switch ("development") {
-    case 'development':
-        api_url = 'https://toast.cc/api/v1';
-        app_url = 'https://toast.cc';
-        break;
-    case 'production':
-        api_url = 'https://toast.cc/api/v1';
-        app_url = 'https://toast.cc';
-        break;
-}
-
-var ROAST_CONFIG = {
-    API_URL: api_url,
-    APP_URL: app_url,
-    GAODE_MAPS_JS_API_KEY: gaode_maps_js_api_key
-};
 
 /***/ }),
 /* 9 */
@@ -22753,6 +22753,7 @@ module.exports = Cancel;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(46);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__modules_cafes_js__ = __webpack_require__(47);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__modules_users_js__ = __webpack_require__(48);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__modules_brewMethods_js__ = __webpack_require__(50);
 /**
  * Adds the promise polyfill for IE 11
  */
@@ -22771,13 +22772,15 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
  */
 
 
+
 /**
  * Export the data store.
  */
 /* harmony default export */ __webpack_exports__["a"] = (new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
   modules: {
     cafes: __WEBPACK_IMPORTED_MODULE_2__modules_cafes_js__["a" /* cafes */],
-    users: __WEBPACK_IMPORTED_MODULE_3__modules_users_js__["a" /* users */]
+    users: __WEBPACK_IMPORTED_MODULE_3__modules_users_js__["a" /* users */],
+    brewMethods: __WEBPACK_IMPORTED_MODULE_4__modules_brewMethods_js__["a" /* brewMethods */]
   }
 }));
 
@@ -22786,7 +22789,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__config_js__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__config_js__ = __webpack_require__(6);
 /**
  * Imports the Roast API URL from the config.
  */
@@ -22807,13 +22810,13 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
     /**
      * POST /api/v1/cafes
      */
-    postAddNewCafe: function postAddNewCafe(name, address, city, state, zip) {
+    postAddNewCafe: function postAddNewCafe(name, locations, website, description, roaster) {
         return axios.post(__WEBPACK_IMPORTED_MODULE_0__config_js__["a" /* ROAST_CONFIG */].API_URL + '/cafes', {
             name: name,
-            address: address,
-            city: city,
-            state: state,
-            zip: zip
+            locations: locations,
+            website: website,
+            description: description,
+            roaster: roaster
         });
     }
 });
@@ -22823,7 +22826,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(18);
-module.exports = __webpack_require__(87);
+module.exports = __webpack_require__(89);
 
 
 /***/ }),
@@ -51845,7 +51848,7 @@ module.exports = __webpack_require__(23);
 var utils = __webpack_require__(0);
 var bind = __webpack_require__(10);
 var Axios = __webpack_require__(25);
-var defaults = __webpack_require__(6);
+var defaults = __webpack_require__(7);
 
 /**
  * Create an instance of Axios
@@ -51928,7 +51931,7 @@ function isSlowBuffer (obj) {
 "use strict";
 
 
-var defaults = __webpack_require__(6);
+var defaults = __webpack_require__(7);
 var utils = __webpack_require__(0);
 var InterceptorManager = __webpack_require__(34);
 var dispatchRequest = __webpack_require__(35);
@@ -52469,7 +52472,7 @@ module.exports = InterceptorManager;
 var utils = __webpack_require__(0);
 var transformData = __webpack_require__(36);
 var isCancel = __webpack_require__(13);
-var defaults = __webpack_require__(6);
+var defaults = __webpack_require__(7);
 var isAbsoluteURL = __webpack_require__(37);
 var combineURLs = __webpack_require__(38);
 
@@ -52980,7 +52983,7 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
     attachTo.clearImmediate = clearImmediate;
 }(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4), __webpack_require__(7)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4), __webpack_require__(8)))
 
 /***/ }),
 /* 43 */
@@ -53015,23 +53018,23 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
     routes: [{
         path: '/',
         name: 'layout',
-        component: __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('Home', __webpack_require__(50)),
+        component: __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('Home', __webpack_require__(52)),
         children: [{
             path: 'home',
             name: 'home',
-            component: __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('Home', __webpack_require__(61))
+            component: __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('Home', __webpack_require__(63))
         }, {
             path: 'cafes',
             name: 'cafes',
-            component: __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('Cafes', __webpack_require__(66))
+            component: __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('Cafes', __webpack_require__(68))
         }, {
             path: 'cafes/new',
             name: 'newcafe',
-            component: __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('NewCafe', __webpack_require__(77))
+            component: __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('NewCafe', __webpack_require__(79))
         }, {
             path: 'cafes/:id',
             name: 'cafe',
-            component: __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('Cafe', __webpack_require__(82))
+            component: __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('Cafe', __webpack_require__(84))
         }]
     }]
 }));
@@ -56849,7 +56852,7 @@ return Promise$1;
 
 //# sourceMappingURL=es6-promise.map
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7), __webpack_require__(4)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8), __webpack_require__(4)))
 
 /***/ }),
 /* 46 */
@@ -57859,15 +57862,12 @@ var cafes = {
                 state = _ref3.state,
                 dispatch = _ref3.dispatch;
 
-            // 状态1表示开始添加
             commit('setCafeAddStatus', 1);
 
-            __WEBPACK_IMPORTED_MODULE_0__api_cafe_js__["a" /* default */].postAddNewCafe(data.name, data.address, data.city, data.state, data.zip).then(function (response) {
-                // 状态2表示添加成功
+            __WEBPACK_IMPORTED_MODULE_0__api_cafe_js__["a" /* default */].postAddNewCafe(data.name, data.locations, data.website, data.description, data.roaster).then(function (response) {
                 commit('setCafeAddStatus', 2);
                 dispatch('loadCafes');
             }).catch(function () {
-                // 状态3表示添加失败
                 commit('setCafeAddStatus', 3);
             });
         }
@@ -58042,7 +58042,7 @@ var users = {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__config_js__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__config_js__ = __webpack_require__(6);
 /**
  * Imports the Roast API URL from the config.
  */
@@ -58072,18 +58072,115 @@ var users = {
 
 /***/ }),
 /* 50 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return brewMethods; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__api_brewMethod_js__ = __webpack_require__(51);
+/*
+|-------------------------------------------------------------------------------
+| VUEX modules/brewMethods.js
+|-------------------------------------------------------------------------------
+| The Vuex data store for the brew methods
+*/
+
+
+var brewMethods = {
+    /**
+     * Defines the state being monitored for the module
+     */
+    state: {
+        brewMethods: [],
+        brewMethodsLoadStatus: 0
+    },
+
+    /**
+     * Defines the actions used by the Vuex module.
+     */
+    actions: {
+        // Loads all of the brew methods.
+        loadBrewMethods: function loadBrewMethods(_ref) {
+            var commit = _ref.commit;
+
+            commit('setBrewMethodsLoadStatus', 1);
+
+            // Calls the API to load the brew methods.
+            __WEBPACK_IMPORTED_MODULE_0__api_brewMethod_js__["a" /* default */].getBrewMethods().then(function (response) {
+                // Sets the brew methods on a successful response.
+                commit('setBrewMethods', response.data);
+                commit('setBrewMethodsLoadStatus', 2);
+            }).catch(function () {
+                // Clears the brew methods on failure.
+                commit('setBrewMethods', []);
+                commit('setBrewMethodsLoadStatus', 3);
+            });
+        }
+    },
+
+    /**
+     * Defines the mutations used by the module.
+     */
+    mutations: {
+        // Sets the brew method load status.
+        setBrewMethodsLoadStatus: function setBrewMethodsLoadStatus(state, status) {
+            state.brewMethodsLoadStatus = status;
+        },
+
+        // Sets the brew methods.
+        setBrewMethods: function setBrewMethods(state, brewMethods) {
+            state.brewMethods = brewMethods;
+        }
+    },
+
+    /**
+     * Defines the getters used by the module.
+     */
+    getters: {
+        // Returns the brew methods.
+        getBrewMethods: function getBrewMethods(state) {
+            return state.brewMethods;
+        },
+
+        // Returns the brew methods load status.
+        getBrewMethodsLoadStatus: function getBrewMethodsLoadStatus(state) {
+            return state.brewMethodsLoadStatus;
+        }
+    }
+};
+
+/***/ }),
+/* 51 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__config_js__ = __webpack_require__(6);
+/**
+ * Imports the Roast API URL from the config.
+ */
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+  /**
+   GET   /api/v1/brew-methods
+   */
+  getBrewMethods: function getBrewMethods() {
+    return axios.get(__WEBPACK_IMPORTED_MODULE_0__config_js__["a" /* ROAST_CONFIG */].API_URL + '/brew-methods');
+  }
+});
+
+/***/ }),
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(51)
+  __webpack_require__(53)
 }
 var normalizeComponent = __webpack_require__(3)
 /* script */
-var __vue_script__ = __webpack_require__(54)
+var __vue_script__ = __webpack_require__(56)
 /* template */
-var __vue_template__ = __webpack_require__(60)
+var __vue_template__ = __webpack_require__(62)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -58122,13 +58219,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 51 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(52);
+var content = __webpack_require__(54);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -58148,7 +58245,7 @@ if(false) {
 }
 
 /***/ }),
-/* 52 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(false);
@@ -58156,13 +58253,13 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 53 */
+/* 55 */
 /***/ (function(module, exports) {
 
 /**
@@ -58195,12 +58292,12 @@ module.exports = function listToStyles (parentId, list) {
 
 
 /***/ }),
-/* 54 */
+/* 56 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_global_Navigation_vue__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_global_Navigation_vue__ = __webpack_require__(57);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_global_Navigation_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_global_Navigation_vue__);
 //
 //
@@ -58218,23 +58315,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     created: function created() {
         this.$store.dispatch('loadCafes');
         this.$store.dispatch('loadUser');
+        this.$store.dispatch('loadBrewMethods');
     }
 });
 
 /***/ }),
-/* 55 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(56)
+  __webpack_require__(58)
 }
 var normalizeComponent = __webpack_require__(3)
 /* script */
-var __vue_script__ = __webpack_require__(58)
+var __vue_script__ = __webpack_require__(60)
 /* template */
-var __vue_template__ = __webpack_require__(59)
+var __vue_template__ = __webpack_require__(61)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -58273,13 +58371,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 56 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(57);
+var content = __webpack_require__(59);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -58299,7 +58397,7 @@ if(false) {
 }
 
 /***/ }),
-/* 57 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(false);
@@ -58313,7 +58411,7 @@ exports.push([module.i, "\nnav.top-navigation {\n  background-color: #FFFFFF;\n 
 
 
 /***/ }),
-/* 58 */
+/* 60 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -58365,7 +58463,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 59 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -58433,7 +58531,7 @@ if (false) {
 }
 
 /***/ }),
-/* 60 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -58458,19 +58556,19 @@ if (false) {
 }
 
 /***/ }),
-/* 61 */
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(62)
+  __webpack_require__(64)
 }
 var normalizeComponent = __webpack_require__(3)
 /* script */
-var __vue_script__ = __webpack_require__(64)
+var __vue_script__ = __webpack_require__(66)
 /* template */
-var __vue_template__ = __webpack_require__(65)
+var __vue_template__ = __webpack_require__(67)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -58509,13 +58607,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 62 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(63);
+var content = __webpack_require__(65);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -58535,7 +58633,7 @@ if(false) {
 }
 
 /***/ }),
-/* 63 */
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(false);
@@ -58549,7 +58647,7 @@ exports.push([module.i, "\nul li[data-v-440dff1c]{\n    list-style-type: none;\n
 
 
 /***/ }),
-/* 64 */
+/* 66 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -58589,7 +58687,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 65 */
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -58661,19 +58759,19 @@ if (false) {
 }
 
 /***/ }),
-/* 66 */
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(67)
+  __webpack_require__(69)
 }
 var normalizeComponent = __webpack_require__(3)
 /* script */
-var __vue_script__ = __webpack_require__(69)
+var __vue_script__ = __webpack_require__(71)
 /* template */
-var __vue_template__ = __webpack_require__(76)
+var __vue_template__ = __webpack_require__(78)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -58712,13 +58810,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 67 */
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(68);
+var content = __webpack_require__(70);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -58738,7 +58836,7 @@ if(false) {
 }
 
 /***/ }),
-/* 68 */
+/* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(false);
@@ -58752,12 +58850,12 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""])
 
 
 /***/ }),
-/* 69 */
+/* 71 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_cafes_CafeMap_vue__ = __webpack_require__(70);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_cafes_CafeMap_vue__ = __webpack_require__(72);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_cafes_CafeMap_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_cafes_CafeMap_vue__);
 //
 //
@@ -58781,19 +58879,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 70 */
+/* 72 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(71)
+  __webpack_require__(73)
 }
 var normalizeComponent = __webpack_require__(3)
 /* script */
-var __vue_script__ = __webpack_require__(73)
+var __vue_script__ = __webpack_require__(75)
 /* template */
-var __vue_template__ = __webpack_require__(75)
+var __vue_template__ = __webpack_require__(77)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -58832,13 +58930,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 71 */
+/* 73 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(72);
+var content = __webpack_require__(74);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -58858,7 +58956,7 @@ if(false) {
 }
 
 /***/ }),
-/* 72 */
+/* 74 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(false);
@@ -58872,13 +58970,13 @@ exports.push([module.i, "\ndiv#cafe-map {\n  width: 100%;\n  height: 400px;\n}\n
 
 
 /***/ }),
-/* 73 */
+/* 75 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__config_js__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__event_bus_js__ = __webpack_require__(74);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__config_js__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__event_bus_js__ = __webpack_require__(76);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__api_cafe__ = __webpack_require__(16);
 //
 //
@@ -58991,7 +59089,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 74 */
+/* 76 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -59002,7 +59100,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var EventBus = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a();
 
 /***/ }),
-/* 75 */
+/* 77 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -59022,7 +59120,7 @@ if (false) {
 }
 
 /***/ }),
-/* 76 */
+/* 78 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -59053,19 +59151,19 @@ if (false) {
 }
 
 /***/ }),
-/* 77 */
+/* 79 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(78)
+  __webpack_require__(80)
 }
 var normalizeComponent = __webpack_require__(3)
 /* script */
-var __vue_script__ = __webpack_require__(80)
+var __vue_script__ = __webpack_require__(82)
 /* template */
-var __vue_template__ = __webpack_require__(81)
+var __vue_template__ = __webpack_require__(83)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -59104,13 +59202,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 78 */
+/* 80 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(79);
+var content = __webpack_require__(81);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -59130,7 +59228,7 @@ if(false) {
 }
 
 /***/ }),
-/* 79 */
+/* 81 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(false);
@@ -59144,11 +59242,47 @@ exports.push([module.i, "", ""]);
 
 
 /***/ }),
-/* 80 */
+/* 82 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -59200,16 +59334,97 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             name: '',
-            address: '',
-            city: '',
-            state: '',
-            zip: '',
-            isDisabled: false,
+            locations: [],
+            website: '',
+            description: '',
+            roaster: false,
             validations: {
                 name: {
                     is_valid: true,
                     text: ''
                 },
+                locations: [],
+                oneLocation: {
+                    is_valid: true,
+                    text: ''
+                },
+                website: {
+                    is_valid: true,
+                    text: ''
+                }
+            }
+        };
+    },
+
+    methods: {
+        submitNewCafe: function submitNewCafe() {
+            if (this.validateNewCafe()) {
+                this.$store.dispatch('addCafe', {
+                    name: this.name,
+                    locations: this.locations,
+                    website: this.website,
+                    description: this.description,
+                    roaster: this.roaster
+                });
+            }
+        },
+        validateNewCafe: function validateNewCafe() {
+            for (var index in this.locations) {
+                if (this.locations.hasOwnProperty(index)) {
+                    // 确保地址字段不为空
+                    if (this.locations[index].address.trim() === '') {
+                        validNewCafeForm = false;
+                        this.validations.locations[index].address.is_valid = false;
+                        this.validations.locations[index].address.text = 'Please enter an address for the new cafe!';
+                    } else {
+                        this.validations.locations[index].address.is_valid = true;
+                        this.validations.locations[index].address.text = '';
+                    }
+                }
+
+                // 确保城市字段不为空
+                if (this.locations[index].city.trim() === '') {
+                    validNewCafeForm = false;
+                    this.validations.locations[index].city.is_valid = false;
+                    this.validations.locations[index].city.text = 'Please enter a city for the new cafe!';
+                } else {
+                    this.validations.locations[index].city.is_valid = true;
+                    this.validations.locations[index].city.text = '';
+                }
+
+                // 确保省份字段不为空
+                if (this.locations[index].state.trim() === '') {
+                    validNewCafeForm = false;
+                    this.validations.locations[index].state.is_valid = false;
+                    this.validations.locations[index].state.text = 'Please enter a state for the new cafe!';
+                } else {
+                    this.validations.locations[index].state.is_valid = true;
+                    this.validations.locations[index].state.text = '';
+                }
+
+                // 确保邮编字段不为空
+                if (this.locations[index].zip.trim() === '' || !this.locations[index].zip.match(/(^\d{6}$)/)) {
+                    validNewCafeForm = false;
+                    this.validations.locations[index].zip.is_valid = false;
+                    this.validations.locations[index].zip.text = 'Please enter a valid zip code for the new cafe!';
+                } else {
+                    this.validations.locations[index].zip.is_valid = true;
+                    this.validations.locations[index].zip.text = '';
+                }
+                // 确保网址是有效的 URL
+                if (this.website.trim !== '' && !this.website.match(/^((https?):\/\/)?([w|W]{3}\.)+[a-zA-Z0-9\-\.]{3,}\.[a-zA-Z]{2,}(\.[a-zA-Z]{2,})?$/)) {
+                    validNewCafeForm = false;
+                    this.validations.website.is_valid = false;
+                    this.validations.website.text = '请输入有效的网址 URL';
+                } else {
+                    this.validations.website.is_valid = true;
+                    this.validations.website.text = '';
+                }
+            }
+        },
+        addLocation: function addLocation() {
+            this.locations.push({ name: '', address: '', city: '', state: '', zip: '', methodsAvailable: [] });
+            this.validations.locations.push({
                 address: {
                     is_valid: true,
                     text: ''
@@ -59226,88 +59441,63 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     is_valid: true,
                     text: ''
                 }
-            }
-        };
+            });
+        },
+        clearForm: function clearForm() {
+            this.name = '';
+            this.locations = [];
+            this.website = '';
+            this.description = '';
+            this.roaster = false;
+            this.validations = {
+                name: {
+                    is_valid: true,
+                    text: ''
+                },
+                locations: [],
+                oneLocation: {
+                    is_valid: true,
+                    text: ''
+                },
+                website: {
+                    is_valid: true,
+                    text: ''
+                }
+            };
+
+            this.addLocation();
+        }
+    },
+    created: function created() {
+        this.addLocation();
     },
 
-    methods: {
-        submitNewCafe: function submitNewCafe() {
-            if (this.validateNewCafe()) {
-                this.$store.dispatch('addCafe', {
-                    name: this.name,
-                    address: this.address,
-                    city: this.city,
-                    state: this.state,
-                    zip: this.zip
-                }).then(function (response) {
-                    this.isDisabled = true;
-                    this.$router.push({ name: 'home' });
-                }).catch(function () {
-                    this.isDisabled = false;
-                    this.validations.name.text = '咖啡店的名字不可相同';
-                });
-            }
+    computed: {
+        brewMethods: function brewMethods() {
+            return this.$store.getters.getBrewMethods;
         },
-        validateNewCafe: function validateNewCafe() {
-            var validNewCafeForm = true;
-
-            // 确保 name 字段不为空
-            if (this.name.trim() === '') {
-                validNewCafeForm = false;
-                this.validations.name.is_valid = false;
-                this.validations.name.text = '请输入咖啡店的名字';
-            } else {
-                this.validations.name.is_valid = true;
-                this.validations.name.text = '';
+        addCafeStatus: function addCafeStatus() {
+            return this.$store.getters.getCafeAddStatus;
+        }
+    },
+    watch: {
+        'addCafeStatus': function addCafeStatus() {
+            if (this.addCafeStatus === 2) {
+                // 添加成功
+                this.clearForm();
+                $("#cafe-added-successfully").show().delay(5000).fadeOut();
             }
 
-            // 确保 address 字段不为空
-            if (this.address.trim() === '') {
-                validNewCafeForm = false;
-                this.validations.address.is_valid = false;
-                this.validations.address.text = '请输入咖啡店的地址!';
-            } else {
-                this.validations.address.is_valid = true;
-                this.validations.address.text = '';
+            if (this.addCafeStatus === 3) {
+                // 添加失败
+                $("#cafe-added-unsuccessfully").show().delay(5000).fadeOut();
             }
-
-            //  确保 city 字段不为空
-            if (this.city.trim() === '') {
-                validNewCafeForm = false;
-                this.validations.city.is_valid = false;
-                this.validations.city.text = '请输入咖啡店所在城市!';
-            } else {
-                this.validations.city.is_valid = true;
-                this.validations.city.text = '';
-            }
-
-            //  确保 state 字段不为空
-            if (this.state.trim() === '') {
-                validNewCafeForm = false;
-                this.validations.state.is_valid = false;
-                this.validations.state.text = '请输入咖啡店所在省份!';
-            } else {
-                this.validations.state.is_valid = true;
-                this.validations.state.text = '';
-            }
-
-            // 确保 zip 字段不为空且格式正确
-            if (this.zip.trim() === '' || !this.zip.match(/(^\d{6}$)/)) {
-                validNewCafeForm = false;
-                this.validations.zip.is_valid = false;
-                this.validations.zip.text = '请输入有效的邮编地址!';
-            } else {
-                this.validations.zip.is_valid = true;
-                this.validations.zip.text = '';
-            }
-
-            return validNewCafeForm;
         }
     }
 });
 
 /***/ }),
-/* 81 */
+/* 83 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -59315,13 +59505,15 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "page" }, [
-    _c("div", { staticClass: "page" }, [
-      _c("form", [
-        _c("div", { staticClass: "grid-container" }, [
+    _c("form", [
+      _c(
+        "div",
+        { staticClass: "grid-container" },
+        [
           _c("div", { staticClass: "grid-x grid-padding-x" }, [
             _c("div", { staticClass: "large-12 medium-12 small-12 cell" }, [
               _c("label", [
-                _vm._v("名称\n                            "),
+                _vm._v("名称\n                        "),
                 _c("input", {
                   directives: [
                     {
@@ -59363,24 +59555,24 @@ var render = function() {
             _vm._v(" "),
             _c("div", { staticClass: "large-12 medium-12 small-12 cell" }, [
               _c("label", [
-                _vm._v("地址\n                            "),
+                _vm._v("网址\n                        "),
                 _c("input", {
                   directives: [
                     {
                       name: "model",
                       rawName: "v-model",
-                      value: _vm.address,
-                      expression: "address"
+                      value: _vm.website,
+                      expression: "website"
                     }
                   ],
-                  attrs: { type: "text", placeholder: "地址" },
-                  domProps: { value: _vm.address },
+                  attrs: { type: "text", placeholder: "网址" },
+                  domProps: { value: _vm.website },
                   on: {
                     input: function($event) {
                       if ($event.target.composing) {
                         return
                       }
-                      _vm.address = $event.target.value
+                      _vm.website = $event.target.value
                     }
                   }
                 })
@@ -59393,139 +59585,369 @@ var render = function() {
                     {
                       name: "show",
                       rawName: "v-show",
-                      value: !_vm.validations.address.is_valid,
-                      expression: "!validations.address.is_valid"
+                      value: !_vm.validations.website.is_valid,
+                      expression: "!validations.website.is_valid"
                     }
                   ],
                   staticClass: "validation"
                 },
-                [_vm._v(_vm._s(_vm.validations.address.text))]
+                [_vm._v(_vm._s(_vm.validations.website.text))]
               )
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "large-12 medium-12 small-12 cell" }, [
               _c("label", [
-                _vm._v("城市\n                            "),
+                _vm._v("简介\n                        "),
                 _c("input", {
                   directives: [
                     {
                       name: "model",
                       rawName: "v-model",
-                      value: _vm.city,
-                      expression: "city"
+                      value: _vm.description,
+                      expression: "description"
                     }
                   ],
-                  attrs: { type: "text", placeholder: "城市" },
-                  domProps: { value: _vm.city },
+                  attrs: { type: "text", placeholder: "简介" },
+                  domProps: { value: _vm.description },
                   on: {
                     input: function($event) {
                       if ($event.target.composing) {
                         return
                       }
-                      _vm.city = $event.target.value
+                      _vm.description = $event.target.value
                     }
                   }
                 })
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _vm._l(_vm.locations, function(location, key) {
+            return _c("div", { staticClass: "grid-x grid-padding-x" }, [
+              _vm._m(0, true),
+              _vm._v(" "),
+              _c("div", { staticClass: "large-6 medium-6 small-12 cell" }, [
+                _c("label", [
+                  _vm._v("位置名称\n                        "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.locations[key].name,
+                        expression: "locations[key].name"
+                      }
+                    ],
+                    attrs: { type: "text", placeholder: "位置名称" },
+                    domProps: { value: _vm.locations[key].name },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.locations[key],
+                          "name",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "large-6 medium-6 small-12 cell" }, [
+                _c("label", [
+                  _vm._v("详细地址\n                        "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.locations[key].address,
+                        expression: "locations[key].address"
+                      }
+                    ],
+                    attrs: { type: "text", placeholder: "详细地址" },
+                    domProps: { value: _vm.locations[key].address },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.locations[key],
+                          "address",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c(
+                  "span",
+                  {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: !_vm.validations.locations[key].address.is_valid,
+                        expression:
+                          "!validations.locations[key].address.is_valid"
+                      }
+                    ],
+                    staticClass: "validation"
+                  },
+                  [_vm._v(_vm._s(_vm.validations.locations[key].address.text))]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "large-6 medium-6 small-12 cell" }, [
+                _c("label", [
+                  _vm._v("城市\n                        "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.locations[key].city,
+                        expression: "locations[key].city"
+                      }
+                    ],
+                    attrs: { type: "text", placeholder: "城市" },
+                    domProps: { value: _vm.locations[key].city },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.locations[key],
+                          "city",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c(
+                  "span",
+                  {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: !_vm.validations.locations[key].city.is_valid,
+                        expression: "!validations.locations[key].city.is_valid"
+                      }
+                    ],
+                    staticClass: "validation"
+                  },
+                  [_vm._v(_vm._s(_vm.validations.locations[key].city.text))]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "large-6 medium-6 small-12 cell" }, [
+                _c("label", [
+                  _vm._v("省份\n                        "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.locations[key].state,
+                        expression: "locations[key].state"
+                      }
+                    ],
+                    attrs: { type: "text", placeholder: "省份" },
+                    domProps: { value: _vm.locations[key].state },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.locations[key],
+                          "state",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c(
+                  "span",
+                  {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: !_vm.validations.locations[key].state.is_valid,
+                        expression: "!validations.locations[key].state.is_valid"
+                      }
+                    ],
+                    staticClass: "validation"
+                  },
+                  [_vm._v(_vm._s(_vm.validations.locations[key].state.text))]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "large-6 medium-6 small-12 cell" }, [
+                _c("label", [
+                  _vm._v("邮编\n                        "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.locations[key].zip,
+                        expression: "locations[key].zip"
+                      }
+                    ],
+                    attrs: { type: "text", placeholder: "邮编" },
+                    domProps: { value: _vm.locations[key].zip },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.locations[key], "zip", $event.target.value)
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c(
+                  "span",
+                  {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: !_vm.validations.locations[key].zip.is_valid,
+                        expression: "!validations.locations[key].zip.is_valid"
+                      }
+                    ],
+                    staticClass: "validation"
+                  },
+                  [_vm._v(_vm._s(_vm.validations.locations[key].zip.text))]
+                )
               ]),
               _vm._v(" "),
               _c(
-                "span",
-                {
-                  directives: [
-                    {
-                      name: "show",
-                      rawName: "v-show",
-                      value: !_vm.validations.city.is_valid,
-                      expression: "!validations.city.is_valid"
+                "div",
+                { staticClass: "large-12 medium-12 small-12 cell" },
+                [
+                  _c("label", [_vm._v("支持的冲泡方法")]),
+                  _vm._v(" "),
+                  _vm._l(_vm.brewMethods, function(brewMethod) {
+                    return _c("span", { staticClass: "brew-method" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.locations[key].methodsAvailable,
+                            expression: "locations[key].methodsAvailable"
+                          }
+                        ],
+                        attrs: {
+                          id: "brew-method-" + brewMethod.id + "-" + key,
+                          type: "checkbox"
+                        },
+                        domProps: {
+                          value: brewMethod.id,
+                          checked: Array.isArray(
+                            _vm.locations[key].methodsAvailable
+                          )
+                            ? _vm._i(
+                                _vm.locations[key].methodsAvailable,
+                                brewMethod.id
+                              ) > -1
+                            : _vm.locations[key].methodsAvailable
+                        },
+                        on: {
+                          change: function($event) {
+                            var $$a = _vm.locations[key].methodsAvailable,
+                              $$el = $event.target,
+                              $$c = $$el.checked ? true : false
+                            if (Array.isArray($$a)) {
+                              var $$v = brewMethod.id,
+                                $$i = _vm._i($$a, $$v)
+                              if ($$el.checked) {
+                                $$i < 0 &&
+                                  _vm.$set(
+                                    _vm.locations[key],
+                                    "methodsAvailable",
+                                    $$a.concat([$$v])
+                                  )
+                              } else {
+                                $$i > -1 &&
+                                  _vm.$set(
+                                    _vm.locations[key],
+                                    "methodsAvailable",
+                                    $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                                  )
+                              }
+                            } else {
+                              _vm.$set(
+                                _vm.locations[key],
+                                "methodsAvailable",
+                                $$c
+                              )
+                            }
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "label",
+                        {
+                          attrs: {
+                            for: "brew-method-" + brewMethod.id + "-" + key
+                          }
+                        },
+                        [_vm._v(_vm._s(brewMethod.method))]
+                      )
+                    ])
+                  })
+                ],
+                2
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "large-12 medium-12 small-12 cell" }, [
+                _c(
+                  "a",
+                  {
+                    staticClass: "button",
+                    on: {
+                      click: function($event) {
+                        _vm.removeLocation(key)
+                      }
                     }
-                  ],
-                  staticClass: "validation"
-                },
-                [_vm._v(_vm._s(_vm.validations.city.text))]
-              )
-            ]),
-            _vm._v(" "),
+                  },
+                  [_vm._v("移除位置")]
+                )
+              ])
+            ])
+          }),
+          _vm._v(" "),
+          _c("div", { staticClass: "grid-x grid-padding-x" }, [
             _c("div", { staticClass: "large-12 medium-12 small-12 cell" }, [
-              _c("label", [
-                _vm._v("省份\n                            "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.state,
-                      expression: "state"
-                    }
-                  ],
-                  attrs: { type: "text", placeholder: "省份" },
-                  domProps: { value: _vm.state },
+              _c(
+                "a",
+                {
+                  staticClass: "button",
                   on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.state = $event.target.value
+                    click: function($event) {
+                      _vm.addLocation()
                     }
                   }
-                })
-              ]),
-              _vm._v(" "),
-              _c(
-                "span",
-                {
-                  directives: [
-                    {
-                      name: "show",
-                      rawName: "v-show",
-                      value: !_vm.validations.state.is_valid,
-                      expression: "!validations.state.is_valid"
-                    }
-                  ],
-                  staticClass: "validation"
                 },
-                [_vm._v(_vm._s(_vm.validations.state.text))]
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "large-12 medium-12 small-12 cell" }, [
-              _c("label", [
-                _vm._v("邮编\n                            "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.zip,
-                      expression: "zip"
-                    }
-                  ],
-                  attrs: { type: "text", placeholder: "邮编" },
-                  domProps: { value: _vm.zip },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.zip = $event.target.value
-                    }
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c(
-                "span",
-                {
-                  directives: [
-                    {
-                      name: "show",
-                      rawName: "v-show",
-                      value: !_vm.validations.zip.is_valid,
-                      expression: "!validations.zip.is_valid"
-                    }
-                  ],
-                  staticClass: "validation"
-                },
-                [_vm._v(_vm._s(_vm.validations.zip.text))]
+                [_vm._v("新增位置")]
               )
             ]),
             _vm._v(" "),
@@ -59534,23 +59956,32 @@ var render = function() {
                 "a",
                 {
                   staticClass: "button",
-                  attrs: { disabled: _vm.isDisabled },
                   on: {
                     click: function($event) {
                       _vm.submitNewCafe()
                     }
                   }
                 },
-                [_vm._v("提交")]
+                [_vm._v("提交表单")]
               )
             ])
           ])
-        ])
-      ])
+        ],
+        2
+      )
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "large-12 medium-12 small-12 cell" }, [
+      _c("h3", [_vm._v("位置")])
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -59561,19 +59992,19 @@ if (false) {
 }
 
 /***/ }),
-/* 82 */
+/* 84 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(83)
+  __webpack_require__(85)
 }
 var normalizeComponent = __webpack_require__(3)
 /* script */
-var __vue_script__ = __webpack_require__(85)
+var __vue_script__ = __webpack_require__(87)
 /* template */
-var __vue_template__ = __webpack_require__(86)
+var __vue_template__ = __webpack_require__(88)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -59612,13 +60043,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 83 */
+/* 85 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(84);
+var content = __webpack_require__(86);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -59638,7 +60069,7 @@ if(false) {
 }
 
 /***/ }),
-/* 84 */
+/* 86 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(1)(false);
@@ -59652,7 +60083,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 
 /***/ }),
-/* 85 */
+/* 87 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -59667,7 +60098,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 86 */
+/* 88 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -59687,7 +60118,7 @@ if (false) {
 }
 
 /***/ }),
-/* 87 */
+/* 89 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
