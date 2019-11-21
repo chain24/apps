@@ -14,7 +14,7 @@ class CreateCafesBrewMethodsTable extends Migration
     public function up()
     {
         Schema::create('cafes_brew_methods', function (Blueprint $table) {
-            $table->increments('id');
+            $table->integer('cafe_id')->unsigned();
             $table->integer('brew_method_id')->unsigned();
         });
     }
