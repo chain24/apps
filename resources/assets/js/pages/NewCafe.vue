@@ -248,4 +248,146 @@
 
 <style scoped lang="scss">
     @import '~@/abstracts/_variables.scss';
+    div#new-cafe-page {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: white;
+        z-index: 99999;
+        overflow: auto;
+        img#back {
+            float: right;
+            margin-top: 20px;
+            margin-right: 20px;
+        }
+        .centered {
+            margin: auto;
+        }
+        h2.page-title {
+            color: #342C0C;
+            font-size: 36px;
+            font-weight: 900;
+            font-family: "Lato", sans-serif;
+            margin-top: 60px;
+        }
+        label.form-label {
+            font-family: "Lato", sans-serif;
+            text-transform: uppercase;
+            font-weight: bold;
+            color: black;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+        input[type="text"].form-input {
+            border: 1px solid #BABABA;
+            border-radius: 3px;
+            &.invalid {
+                border: 1px solid #D0021B;
+            }
+        }
+        div.validation {
+            color: #D0021B;
+            font-family: "Lato", sans-serif;
+            font-size: 14px;
+            margin-top: -15px;
+            margin-bottom: 15px;
+        }
+        div.location-type {
+            text-align: center;
+            font-family: "Lato", sans-serif;
+            font-size: 16px;
+            width: 25%;
+            display: inline-block;
+            height: 55px;
+            line-height: 55px;
+            cursor: pointer;
+            margin-bottom: 5px;
+            margin-right: 10px;
+            background-color: #EEE;
+            color: $black;
+            &.active {
+                color: white;
+                background-color: $secondary-color;
+            }
+            &.roaster {
+                border-top-left-radius: 3px;
+                border-bottom-left-radius: 3px;
+                border-right: 0px;
+            }
+            &.cafe {
+                border-top-right-radius: 3px;
+                border-bottom-right-radius: 3px;
+            }
+        }
+        div.company-selection-container {
+            position: relative;
+            div.company-autocomplete-container {
+                border-radius: 3px;
+                border: 1px solid #BABABA;
+                background-color: white;
+                margin-top: -17px;
+                width: 80%;
+                position: absolute;
+                z-index: 9999;
+                div.company-autocomplete {
+                    cursor: pointer;
+                    padding-left: 12px;
+                    padding-right: 12px;
+                    padding-top: 8px;
+                    padding-bottom: 8px;
+                    span.company-name {
+                        display: block;
+                        color: #0D223F;
+                        font-size: 16px;
+                        font-family: "Lato", sans-serif;
+                        font-weight: bold;
+                    }
+                    span.company-locations {
+                        display: block;
+                        font-size: 14px;
+                        color: #676767;
+                        font-family: "Lato", sans-serif;
+                    }
+                    &:hover {
+                        background-color: #F2F2F2;
+                    }
+                }
+                div.new-company {
+                    cursor: pointer;
+                    padding-left: 12px;
+                    padding-right: 12px;
+                    padding-top: 8px;
+                    padding-bottom: 8px;
+                    font-family: "Lato", sans-serif;
+                    color: #054E7A;
+                    font-style: italic;
+                    &:hover {
+                        background-color: #F2F2F2;
+                    }
+                }
+            }
+        }
+        a.add-location-button {
+            display: block;
+            text-align: center;
+            height: 50px;
+            color: white;
+            border-radius: 3px;
+            font-size: 18px;
+            font-family: "Lato", sans-serif;
+            background-color: #A7BE4D;
+            line-height: 50px;
+            margin-bottom: 50px;
+        }
+    }
+    /* Small only */
+    @media screen and (max-width: 39.9375em) {
+        div#new-cafe-page {
+            div.location-type {
+                width: 50%;
+            }
+        }
+    }
 </style>

@@ -59236,7 +59236,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "", ""]);
+exports.push([module.i, "\ndiv#new-cafe-page[data-v-10b7d3a0] {\n  position: fixed;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  background-color: white;\n  z-index: 99999;\n  overflow: auto;\n}\ndiv#new-cafe-page img#back[data-v-10b7d3a0] {\n    float: right;\n    margin-top: 20px;\n    margin-right: 20px;\n}\ndiv#new-cafe-page .centered[data-v-10b7d3a0] {\n    margin: auto;\n}\ndiv#new-cafe-page h2.page-title[data-v-10b7d3a0] {\n    color: #342C0C;\n    font-size: 36px;\n    font-weight: 900;\n    font-family: \"Lato\", sans-serif;\n    margin-top: 60px;\n}\ndiv#new-cafe-page label.form-label[data-v-10b7d3a0] {\n    font-family: \"Lato\", sans-serif;\n    text-transform: uppercase;\n    font-weight: bold;\n    color: black;\n    margin-top: 10px;\n    margin-bottom: 10px;\n}\ndiv#new-cafe-page input[type=\"text\"].form-input[data-v-10b7d3a0] {\n    border: 1px solid #BABABA;\n    border-radius: 3px;\n}\ndiv#new-cafe-page input[type=\"text\"].form-input.invalid[data-v-10b7d3a0] {\n      border: 1px solid #D0021B;\n}\ndiv#new-cafe-page div.validation[data-v-10b7d3a0] {\n    color: #D0021B;\n    font-family: \"Lato\", sans-serif;\n    font-size: 14px;\n    margin-top: -15px;\n    margin-bottom: 15px;\n}\ndiv#new-cafe-page div.location-type[data-v-10b7d3a0] {\n    text-align: center;\n    font-family: \"Lato\", sans-serif;\n    font-size: 16px;\n    width: 25%;\n    display: inline-block;\n    height: 55px;\n    line-height: 55px;\n    cursor: pointer;\n    margin-bottom: 5px;\n    margin-right: 10px;\n    background-color: #EEE;\n    color: #111111;\n}\ndiv#new-cafe-page div.location-type.active[data-v-10b7d3a0] {\n      color: white;\n      background-color: #FFBE54;\n}\ndiv#new-cafe-page div.location-type.roaster[data-v-10b7d3a0] {\n      border-top-left-radius: 3px;\n      border-bottom-left-radius: 3px;\n      border-right: 0px;\n}\ndiv#new-cafe-page div.location-type.cafe[data-v-10b7d3a0] {\n      border-top-right-radius: 3px;\n      border-bottom-right-radius: 3px;\n}\ndiv#new-cafe-page div.company-selection-container[data-v-10b7d3a0] {\n    position: relative;\n}\ndiv#new-cafe-page div.company-selection-container div.company-autocomplete-container[data-v-10b7d3a0] {\n      border-radius: 3px;\n      border: 1px solid #BABABA;\n      background-color: white;\n      margin-top: -17px;\n      width: 80%;\n      position: absolute;\n      z-index: 9999;\n}\ndiv#new-cafe-page div.company-selection-container div.company-autocomplete-container div.company-autocomplete[data-v-10b7d3a0] {\n        cursor: pointer;\n        padding-left: 12px;\n        padding-right: 12px;\n        padding-top: 8px;\n        padding-bottom: 8px;\n}\ndiv#new-cafe-page div.company-selection-container div.company-autocomplete-container div.company-autocomplete span.company-name[data-v-10b7d3a0] {\n          display: block;\n          color: #0D223F;\n          font-size: 16px;\n          font-family: \"Lato\", sans-serif;\n          font-weight: bold;\n}\ndiv#new-cafe-page div.company-selection-container div.company-autocomplete-container div.company-autocomplete span.company-locations[data-v-10b7d3a0] {\n          display: block;\n          font-size: 14px;\n          color: #676767;\n          font-family: \"Lato\", sans-serif;\n}\ndiv#new-cafe-page div.company-selection-container div.company-autocomplete-container div.company-autocomplete[data-v-10b7d3a0]:hover {\n          background-color: #F2F2F2;\n}\ndiv#new-cafe-page div.company-selection-container div.company-autocomplete-container div.new-company[data-v-10b7d3a0] {\n        cursor: pointer;\n        padding-left: 12px;\n        padding-right: 12px;\n        padding-top: 8px;\n        padding-bottom: 8px;\n        font-family: \"Lato\", sans-serif;\n        color: #054E7A;\n        font-style: italic;\n}\ndiv#new-cafe-page div.company-selection-container div.company-autocomplete-container div.new-company[data-v-10b7d3a0]:hover {\n          background-color: #F2F2F2;\n}\ndiv#new-cafe-page a.add-location-button[data-v-10b7d3a0] {\n    display: block;\n    text-align: center;\n    height: 50px;\n    color: white;\n    border-radius: 3px;\n    font-size: 18px;\n    font-family: \"Lato\", sans-serif;\n    background-color: #A7BE4D;\n    line-height: 50px;\n    margin-bottom: 50px;\n}\n\n/* Small only */\n@media screen and (max-width: 39.9375em) {\ndiv#new-cafe-page div.location-type[data-v-10b7d3a0] {\n    width: 50%;\n}\n}\n", ""]);
 
 // exports
 
@@ -59380,45 +59380,44 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                         this.validations.locations[index].address.is_valid = true;
                         this.validations.locations[index].address.text = '';
                     }
-                }
+                    // 确保城市字段不为空
+                    if (this.locations[index].city.trim() === '') {
+                        validNewCafeForm = false;
+                        this.validations.locations[index].city.is_valid = false;
+                        this.validations.locations[index].city.text = 'Please enter a city for the new cafe!';
+                    } else {
+                        this.validations.locations[index].city.is_valid = true;
+                        this.validations.locations[index].city.text = '';
+                    }
 
-                // 确保城市字段不为空
-                if (this.locations[index].city.trim() === '') {
-                    validNewCafeForm = false;
-                    this.validations.locations[index].city.is_valid = false;
-                    this.validations.locations[index].city.text = 'Please enter a city for the new cafe!';
-                } else {
-                    this.validations.locations[index].city.is_valid = true;
-                    this.validations.locations[index].city.text = '';
-                }
+                    // 确保省份字段不为空
+                    if (this.locations[index].state.trim() === '') {
+                        validNewCafeForm = false;
+                        this.validations.locations[index].state.is_valid = false;
+                        this.validations.locations[index].state.text = 'Please enter a state for the new cafe!';
+                    } else {
+                        this.validations.locations[index].state.is_valid = true;
+                        this.validations.locations[index].state.text = '';
+                    }
 
-                // 确保省份字段不为空
-                if (this.locations[index].state.trim() === '') {
-                    validNewCafeForm = false;
-                    this.validations.locations[index].state.is_valid = false;
-                    this.validations.locations[index].state.text = 'Please enter a state for the new cafe!';
-                } else {
-                    this.validations.locations[index].state.is_valid = true;
-                    this.validations.locations[index].state.text = '';
-                }
-
-                // 确保邮编字段不为空
-                if (this.locations[index].zip.trim() === '' || !this.locations[index].zip.match(/(^\d{6}$)/)) {
-                    validNewCafeForm = false;
-                    this.validations.locations[index].zip.is_valid = false;
-                    this.validations.locations[index].zip.text = 'Please enter a valid zip code for the new cafe!';
-                } else {
-                    this.validations.locations[index].zip.is_valid = true;
-                    this.validations.locations[index].zip.text = '';
-                }
-                // 确保网址是有效的 URL
-                if (this.website.trim !== '' && !this.website.match(/^((https?):\/\/)?([w|W]{3}\.)+[a-zA-Z0-9\-\.]{3,}\.[a-zA-Z]{2,}(\.[a-zA-Z]{2,})?$/)) {
-                    validNewCafeForm = false;
-                    this.validations.website.is_valid = false;
-                    this.validations.website.text = '请输入有效的网址 URL';
-                } else {
-                    this.validations.website.is_valid = true;
-                    this.validations.website.text = '';
+                    // 确保邮编字段不为空
+                    if (this.locations[index].zip.trim() === '' || !this.locations[index].zip.match(/(^\d{6}$)/)) {
+                        validNewCafeForm = false;
+                        this.validations.locations[index].zip.is_valid = false;
+                        this.validations.locations[index].zip.text = 'Please enter a valid zip code for the new cafe!';
+                    } else {
+                        this.validations.locations[index].zip.is_valid = true;
+                        this.validations.locations[index].zip.text = '';
+                    }
+                    // 确保网址是有效的 URL
+                    if (this.website.trim !== '' && !this.website.match(/^((https?):\/\/)?([w|W]{3}\.)+[a-zA-Z0-9\-\.]{3,}\.[a-zA-Z]{2,}(\.[a-zA-Z]{2,})?$/)) {
+                        validNewCafeForm = false;
+                        this.validations.website.is_valid = false;
+                        this.validations.website.text = '请输入有效的网址 URL';
+                    } else {
+                        this.validations.website.is_valid = true;
+                        this.validations.website.text = '';
+                    }
                 }
             }
         },
