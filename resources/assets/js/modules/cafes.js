@@ -20,15 +20,23 @@ export const cafes = {
 
         cafe: {},
         cafeLoadStatus: 0,
-        cafeAddStatus: 0
+        cafeAddStatus: 0,
+        cafeLikeActionStatus: 0,
+        cafeUnlikeActionStatus: 0,
+
+        cafeLiked: false
     },
     actions: {
         loadCafes( { commit } ){
-            commit( 'setCafesLoadStatus', 1 );
+            commit('setCafeLikedStatus', false);
+            commit('setCafeLoadStatus', 1);
 
             CafeAPI.getCafes()
                 .then( function( response ){
                     commit( 'setCafes', response.data );
+                    if (response.data.user_like.length > 0) {
+                        commit('setCafeLikedStatus', true);
+                    }
                     commit( 'setCafesLoadStatus', 2 );
                 })
                 .catch( function(){
@@ -36,17 +44,21 @@ export const cafes = {
                     commit( 'setCafesLoadStatus', 3 );
                 });
         },
-        loadCafe( { commit }, data ){
-            commit( 'setCafeLoadStatus', 1 );
+        loadCafe({commit}, data) {
+            commit('setCafeLikedStatus', false);
+            commit('setCafeLoadStatus', 1);
 
-            CafeAPI.getCafe( data.id )
-                .then( function( response ){
-                    commit( 'setCafe', response.data );
-                    commit( 'setCafeLoadStatus', 2 );
+            CafeAPI.getCafe(data.id)
+                .then(function (response) {
+                    commit('setCafe', response.data);
+                    if (response.data.user_like.length > 0) {
+                        commit('setCafeLikedStatus', true);
+                    }
+                    commit('setCafeLoadStatus', 2);
                 })
-                .catch( function(){
-                    commit( 'setCafe', {} );
-                    commit( 'setCafeLoadStatus', 3 );
+                .catch(function () {
+                    commit('setCafe', {});
+                    commit('setCafeLoadStatus', 3);
                 });
         },
         addCafe({commit, state, dispatch}, data) {
@@ -61,6 +73,31 @@ export const cafes = {
                     commit('setCafeAddStatus', 3);
                 });
         },
+        likeCafe({commit, state}, data) {
+            commit('setCafeLikeActionStatus', 1);
+
+            CafeAPI.postLikeCafe(data.id)
+                .then(function (response) {
+                    commit('setCafeLikedStatus', true);
+                    commit('setCafeLikeActionStatus', 2);
+                })
+                .catch(function () {
+                    commit('setCafeLikeActionStatus', 3);
+                });
+        },
+
+        unlikeCafe({commit, state}, data) {
+            commit('setCafeUnlikeActionStatus', 1);
+
+            CafeAPI.deleteLikeCafe(data.id)
+                .then(function (response) {
+                    commit('setCafeLikedStatus', false);
+                    commit('setCafeUnlikeActionStatus', 2);
+                })
+                .catch(function () {
+                    commit('setCafeUnlikeActionStatus', 3);
+                });
+        }
 
     },
     mutations: {
@@ -84,6 +121,17 @@ export const cafes = {
         },
         getCafeAddStatus( state) {
             return state.cafeAddStatus;
+        },
+        setCafeLikedStatus(state, status) {
+            state.cafeLiked = status;
+        },
+
+        setCafeLikeActionStatus(state, status) {
+            state.cafeLikeActionStatus = status;
+        },
+
+        setCafeUnlikeActionStatus(state, status) {
+            state.cafeUnlikeActionStatus = status;
         }
     },
     getters: {
@@ -101,6 +149,18 @@ export const cafes = {
 
         getCafe( state ){
             return state.cafe;
+        },
+
+        getCafeLikedStatus( state ){
+            return state.cafeLiked;
+        },
+
+        getCafeLikeActionStatus( state ){
+            return state.cafeLikeActionStatus;
+        },
+
+        getCafeUnlikeActionStatus( state ){
+            return state.cafeUnlikeActionStatus;
         }
     }
 

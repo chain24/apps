@@ -12,9 +12,7 @@
     <title>Roast</title>
 
     <script type='text/javascript'>
-        window.Laravel = <?php echo json_encode([
-            'csrfToken' => csrf_token(),
-        ]); ?>
+        window.Laravel = "{{ json_encode(['csrfToken' => csrf_token()]) }}"
     </script>
 </head>
 <body>

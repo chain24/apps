@@ -64,6 +64,9 @@
                     </span>
                     </div>
                     <div class="large-12 medium-12 small-12 cell">
+                        <tags-input v-bind:unique="key"></tags-input>
+                    </div>
+                    <div class="large-12 medium-12 small-12 cell">
                         <a class="button" v-on:click="removeLocation(key)">移除位置</a>
                     </div>
                 </div>
@@ -81,7 +84,13 @@
 </template>
 
 <script>
+    import {TagsInput} from '../components/global/forms/TagsInput';
+    import {EventBus} from '../event-bus.js';
+    import {ROAST_CONFIG} from '../config.js';
     export default {
+        components: {
+            TagsInput
+        },
         data() {
             return {
                 name: '',
@@ -119,6 +128,7 @@
                 }
             },
             validateNewCafe: function () {
+                let validNewCafeForm = true;
                 for (var index in this.locations) {
                     if (this.locations.hasOwnProperty(index)) {
                         // 确保地址字段不为空
@@ -173,7 +183,7 @@
                 }
             },
             addLocation() {
-                this.locations.push({name: '', address: '', city: '', state: '', zip: '', methodsAvailable: []});
+                this.locations.push({name: '', address: '', city: '', state: '', zip: '', methodsAvailable: [], tags: ''});
                 this.validations.locations.push({
                     address: {
                         is_valid: true,
@@ -228,6 +238,11 @@
             addCafeStatus() {
                 return this.$store.getters.getCafeAddStatus;
             }
+        },
+        mounted() {
+            EventBus.$on('tags-edited', function (tagsAdded) {
+                this.locations[tagsAdded.unique].tags = tagsAdded.tags;
+            }.bind(this));
         },
         watch: {
             'addCafeStatus': function () {
