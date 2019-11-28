@@ -28,15 +28,10 @@ export const cafes = {
     },
     actions: {
         loadCafes( { commit } ){
-            commit('setCafeLikedStatus', false);
             commit('setCafeLoadStatus', 1);
-
             CafeAPI.getCafes()
                 .then( function( response ){
                     commit( 'setCafes', response.data );
-                    if (response.data.user_like.length > 0) {
-                        commit('setCafeLikedStatus', true);
-                    }
                     commit( 'setCafesLoadStatus', 2 );
                 })
                 .catch( function(){

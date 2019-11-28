@@ -57914,14 +57914,9 @@ var cafes = {
         loadCafes: function loadCafes(_ref) {
             var commit = _ref.commit;
 
-            commit('setCafeLikedStatus', false);
             commit('setCafeLoadStatus', 1);
-
             __WEBPACK_IMPORTED_MODULE_0__api_cafe_js__["a" /* default */].getCafes().then(function (response) {
                 commit('setCafes', response.data);
-                if (response.data.user_like.length > 0) {
-                    commit('setCafeLikedStatus', true);
-                }
                 commit('setCafesLoadStatus', 2);
             }).catch(function () {
                 commit('setCafes', []);
